@@ -2,10 +2,18 @@
 import sys
 import subprocess
 from pathlib import Path
+import os
 
 def get_test_commands():
     """Get all available test commands"""
-    base_cmd = ["pytest", "-v"]
+    # Get the path to pytest in the virtual environment
+    if os.name == 'nt':  # Windows
+        pytest_path = str(Path('venv/Scripts/pytest'))
+    else:  # Linux/macOS
+        pytest_path = str(Path('venv/bin/pytest'))
+    
+    # Add -s flag to show print statements
+    base_cmd = [pytest_path, "-v", "-s"]
     test_dir = Path("tests")
     
     commands = {
@@ -36,18 +44,34 @@ def run_with_options(command, headed=False, debug=False):
         command.append("--headed")
     if debug:
         command.extend(["--slowmo", "1000"])
-    subprocess.run(command)
+    try:
+        subprocess.run(command, check=True)
+    except FileNotFoundError:
+        print("Error: pytest not found. Make sure you have activated the virtual environment:")
+        if os.name == 'nt':  # Windows
+            print("  Run: .\\venv\\Scripts\\activate")
+        else:  # Linux/macOS
+            print("  Run: source venv/bin/activate")
+        sys.exit(1)
+    except subprocess.CalledProcessError as e:
+        print(f"Error running tests: {e}")
+        sys.exit(1)
 
 def print_help():
     """Print usage instructions"""
     commands = get_test_commands()
-    print("\nUsage: python scripts.py run <test_name>")
+    print("\nUsage: python3 scripts.py run <test_name>")
     print("\nAvailable test names:")
     for name in commands.keys():
         print(f"  {name}")
     print("\nOptions:")
     print("  --headed                                 - Run in headed mode")
     print("  --debug                                  - Run in debug mode (slow)")
+    print("\nNote: Make sure to activate the virtual environment first:")
+    if os.name == 'nt':  # Windows
+        print("  Run: .\\venv\\Scripts\\activate")
+    else:  # Linux/macOS
+        print("  Run: source venv/bin/activate")
 
 if __name__ == "__main__":
     args = sys.argv[1:]

@@ -13,14 +13,16 @@ Each test demonstrates a specific concept with practical examples.
 """
 
 from playwright.sync_api import Page
-from conftest import describe, it
+from tests.conftest import describe, it
+from tests.learn_examples.utils import learn_print as lprint  # Import our custom print function
 
 # ====== Basic Python Examples ======
 
 # 1. Hello World and Basic Output
-print("Hello, World!")  # The traditional first program
-print("Multiple", "arguments", "are", "separated", "by", "spaces")  # prints with spaces between args
-print("Line 1\nLine 2")  # \n creates a new line
+lprint("\n=== Hello World Examples ===")
+lprint("Hello, World!")  # The traditional first program
+lprint("Multiple", "arguments", "are", "separated", "by", "spaces")  # prints with spaces between args
+lprint("Line 1\nLine 2")  # \n creates a new line
 
 # 2. Comments
 # This is a single-line comment
@@ -31,13 +33,19 @@ And is useful for longer explanations
 '''
 
 # 3. Variables and Basic Data Types
+lprint("\n=== Variables and Data Types ===")
 name = "Python"  # String variable
 age = 30         # Integer variable
 price = 19.99    # Float variable
 is_active = True # Boolean variable
+lprint(f"name: {name} (type: {type(name)})")
+lprint(f"age: {age} (type: {type(age)})")
+lprint(f"price: {price} (type: {type(price)})")
+lprint(f"is_active: {is_active} (type: {type(is_active)})")
 
 # 4. Basic Operators
 # Arithmetic operators
+lprint("\n=== Arithmetic Operators ===")
 x = 10 + 5  # Addition
 y = 10 - 5  # Subtraction
 z = 10 * 5  # Multiplication
@@ -45,49 +53,73 @@ w = 10 / 5  # Division (returns float)
 p = 10 // 3 # Floor division
 r = 10 % 3  # Modulus (remainder)
 e = 2 ** 3  # Exponentiation
+lprint(f"10 + 5 = {x}")
+lprint(f"10 - 5 = {y}")
+lprint(f"10 * 5 = {z}")
+lprint(f"10 / 5 = {w}")
+lprint(f"10 // 3 = {p}")
+lprint(f"10 % 3 = {r}")
+lprint(f"2 ** 3 = {e}")
 
 # Comparison operators
+lprint("\n=== Comparison Operators ===")
 a = 5 > 3   # Greater than
 b = 5 < 3   # Less than
 c = 5 >= 5  # Greater than or equal
 d = 5 <= 4  # Less than or equal
 e = 5 == 5  # Equal to
 f = 5 != 3  # Not equal to
+lprint(f"5 > 3 is {a}")
+lprint(f"5 < 3 is {b}")
+lprint(f"5 >= 5 is {c}")
+lprint(f"5 <= 4 is {d}")
+lprint(f"5 == 5 is {e}")
+lprint(f"5 != 3 is {f}")
 
 # Logical operators
+lprint("\n=== Logical Operators ===")
 g = True and False  # Logical AND
 h = True or False   # Logical OR
 i = not True       # Logical NOT
+lprint(f"True and False is {g}")
+lprint(f"True or False is {h}")
+lprint(f"not True is {i}")
 
 # 5. String Operations
+lprint("\n=== String Operations ===")
 greeting = "Hello"
 name = "Python"
 full_greeting = greeting + " " + name  # String concatenation
 repeated = "Ha" * 3                    # String repetition
 upper_case = greeting.upper()          # String method for uppercase
 lower_case = greeting.lower()          # String method for lowercase
+lprint(f"Concatenation: {full_greeting}")
+lprint(f"Repetition: {repeated}")
+lprint(f"Uppercase: {upper_case}")
+lprint(f"Lowercase: {lower_case}")
 
 @describe("Python Basics - Output and Printing")
 class TestBasicOutput:
     @it("should demonstrate basic print functionality")
     def test_basic_print(self, capsys):
-        print("Hello, World!")
+        lprint("Hello, World!")
+        # We're using stderr, so we check stderr instead of stdout
         captured = capsys.readouterr()
-        assert captured.out == "Hello, World!\n"
+        assert "Hello, World!" in captured.err
     
     @it("should show print with multiple arguments")
     def test_print_multiple_args(self, capsys):
-        print("Hello", "Python", "World")
+        lprint("Hello", "Python", "World")
         captured = capsys.readouterr()
-        assert captured.out == "Hello Python World\n"
+        assert "Hello Python World" in captured.err
     
     @it("should demonstrate special characters")
     def test_special_chars(self, capsys):
-        print("Line 1\nLine 2\tTabbed")
+        lprint("Line 1\nLine 2\tTabbed")
         captured = capsys.readouterr()
-        assert "Line 1" in captured.out
-        assert "Line 2" in captured.out
-        assert "Tabbed" in captured.out
+        assert "Line 1" in captured.err
+        assert "Line 2" in captured.err
+        assert "Tabbed" in captured.err
 
 @describe("Python Basics - Variables and Operations")
 class TestBasicOperations:

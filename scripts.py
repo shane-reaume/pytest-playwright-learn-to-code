@@ -10,9 +10,23 @@ def get_test_commands():
     
     commands = {
         "all": base_cmd + ["tests"],
-        "test_examples": base_cmd + ["tests/test_examples"],
-        "test_unit_only": base_cmd + ["tests/test_examples/test_unit_only.py"],
-        "login_scope": base_cmd + ["tests/test_examples/test_login_scope.py"],
+        "learn_examples": base_cmd + ["tests/learn_examples"],
+        # Individual concept tests
+        "basics": base_cmd + ["tests/learn_examples/test_basics.py"],
+        "data_types": base_cmd + ["tests/learn_examples/test_data_types.py"],
+        "control_flow": base_cmd + ["tests/learn_examples/test_control_flow.py"],
+        "functions": base_cmd + ["tests/learn_examples/test_functions.py"],
+        "oop_basics": base_cmd + ["tests/learn_examples/test_oop_basics.py"],
+        "advanced_oop": base_cmd + ["tests/learn_examples/test_advanced_oop.py"],
+        "modules": base_cmd + ["tests/learn_examples/test_modules_and_packages.py"],
+        "file_io": base_cmd + ["tests/learn_examples/test_file_io.py"],
+        "exceptions": base_cmd + ["tests/learn_examples/test_exceptions_handling.py"],
+        "advanced": base_cmd + ["tests/learn_examples/test_advanced_concepts.py"],
+        "decorators": base_cmd + ["tests/learn_examples/test_decorators_and_context_managers.py"],
+        "iterators": base_cmd + ["tests/learn_examples/test_iterators_and_generators.py"],
+        "stdlib": base_cmd + ["tests/learn_examples/test_standard_library_and_third_party.py"],
+        "pytest_basics": base_cmd + ["tests/learn_examples/test_pytest_basics.py"],
+        "playwright": base_cmd + ["tests/learn_examples/test_playwright_integration.py"],
     }
     return commands
 

@@ -1,193 +1,146 @@
-# Pytest-Playwright Template
+# Python Learning and Testing with Pytest-Playwright
 
-A template for setting up browser testing with Playwright in Python, using pytest as the test runner. This template provides a solid foundation for both UI testing and API testing projects.
+A project for learning Python concepts through test-driven development, using Playwright for browser automation and pytest as the test runner. This project serves as both a learning resource and a practical example of Python testing practices.
 
 ## Features
 
-- **Minimal Dependencies**: Only `pytest-playwright` which brings in all necessary packages
-- **Ready-to-Use Test Structure**: Pre-configured with best practices and patterns
-- **Custom Fixtures**: Examples of both per-test and per-class browser sessions
-- **BDD-Style Tests**: Using `@describe` and `@it` decorators for readable tests
-
-```python
-from playwright.sync_api import Page
-from conftest import describe, it
-
-@describe("Feature or component being tested")
-class TestSomething:
-    @it("should perform specific action")
-    def test_specific_action(self, page: Page):
-        page.goto("https://shaneofalltrades.com")
-        assert "Shane Of All Trades" in page.title()
-```
-
-- **Convenient CLI**: Simple command runner for various test scenarios
-- **Example Tests**: Includes both unit tests and browser automation examples
-
-## Using This Template
-
-1. Click "Use this template" button on GitHub
-2. Name your new repository
-3. Clone your new repository:
-
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_NEW_REPO.git
-   cd YOUR_NEW_REPO
-   ```
-
-## Customization Steps
-
-1. Update `conftest.py` with your own fixtures:
-   - Modify the login URL and credentials
-   - Add your own custom fixtures
-   - Adjust browser configurations as needed
-
-2. Modify `scripts.py` test commands:
-   - Add your own test groupings
-   - Customize command-line options
-   - Add project-specific commands
-
-3. Update `pytest.ini` if needed:
-   - Add custom markers
-   - Configure pytest options
-   - Set up test discovery patterns
-
-4. Replace example tests with your own:
-   - Use `test_unit_only.py` as template for unit tests
-   - Use `test_login_scope.py` as template for browser tests
-
-## Setup Requirements
-
-- Python 3.8 or higher
-- pip (Python package installer)
-- Git
-
-## Installation Steps
-
-1. Create and activate a virtual environment:
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use: venv\Scripts\activate
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Install the required browsers:
-
-   ```bash
-   playwright install
-   ```
+- **Python Learning Examples**: Comprehensive test examples covering Python fundamentals to advanced concepts
+- **Playwright Integration**: Browser automation examples using Playwright
+- **Test-Driven Learning**: Learn Python concepts through practical test cases
+- **Minimal Dependencies**: Uses `pytest-playwright` for all testing needs
 
 ## Project Structure
 
 ```
-your-test-project/
+pytest-playwright-learn-to-code/
 ├── tests/
-│   ├── test_examples/          # Replace with your test categories
-│   │   ├── test_unit_only.py  # Example of basic unit tests
-│   │   └── test_login_scope.py # Example of browser tests
-│   └── conftest.py            # Shared fixtures and configurations
-├── scripts.py                 # Test runner script
-├── pytest.ini                # Pytest configuration
-└── requirements.txt         # Project dependencies
+│   ├── learn_examples/           # Python learning concept tests
+│   │   ├── test_basics.py       # Basic Python concepts
+│   │   ├── test_data_types.py   # Python data types
+│   │   ├── test_control_flow.py # Control flow examples
+│   │   ├── test_functions.py    # Function usage
+│   │   ├── test_oop_basics.py   # Basic OOP concepts
+│   │   └── ... more concept tests
+│   └── conftest.py              # Shared fixtures and configurations
+├── scripts.py                    # Test runner script
+├── pytest.ini                    # Pytest configuration
+└── requirements.txt              # Project dependencies
 ```
 
-## Demo Setup
+## Setup Requirements
 
-This template uses [Magento's demo site](https://magento.softwaretestingboard.com/) for example tests. To get started:
+### Common Requirements
+- Python 3.8 or higher
+- pip (Python package installer)
+- Git
 
-1. Create an account on the demo site:
-   - Visit https://magento.softwaretestingboard.com/
-   - Click "Create an Account"
-   - Fill in your details and create your account
-   - Save your login credentials
+### OS-Specific Requirements
 
-2. Set up your configuration:
-   - Copy `config.example.py` to `config.py`
-   - Update the TEST_USER dictionary with your demo site credentials:
-
-   ```python
-   TEST_USER = {
-       "first_name": "Your_First_Name",
-       "last_name": "Your_Last_Name",
-       "email": "your_email@example.com",
-       "password": "Your_Password123!"
-   }
+#### Linux (Debian/Ubuntu/Linux Mint)
+1. Install Python and required system packages:
+   ```bash
+   sudo apt update
+   sudo apt install python3 python3-pip python3-venv git
    ```
 
-### Understanding Login Scopes
-
-This template provides two login fixtures to demonstrate different testing approaches:
-
-1. **Test-Level Login** (`luma_test_page`):
-   - Creates a fresh login for each test
-   - Ensures complete isolation between tests
-   - Best for tests that modify user data or require a clean state
-   - Example usage:
-
-   ```python
-   @it("should show user's account page")
-   def test_account_page(self, luma_test_page):
-       # Each test gets a fresh login
-       page = luma_test_page
-       assert "My Account" in page.title()
+2. Install additional dependencies for Playwright:
+   ```bash
+   sudo apt install libavif16
    ```
 
-2. **Class-Level Login** (`luma_test_class_page`):
-   - Shares one login across all tests in a class
-   - More efficient for read-only operations
-   - Best for test suites that just browse or verify content
-   - Example usage:
- 
-   ```python
-   @describe("Product browsing tests")
-   class TestBrowsing:
-       @it("should show product details")
-       def test_product_details(self, luma_test_class_page):
-           # Uses the same login across all tests in this class
-           page = luma_test_class_page
-           # Your test code here
+   Note: On some systems, you might need additional dependencies. If you encounter issues, run:
+   ```bash
+   sudo apt install libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
+   libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2
    ```
 
-Choose the appropriate fixture based on your test requirements:
+#### macOS
+1. Install Homebrew (if not already installed):
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
 
-- Use `luma_test_page` when tests modify data or require isolation
-- Use `luma_test_class_page` for faster execution in read-only scenarios
+2. Install Python:
+   ```bash
+   brew install python
+   ```
+
+#### Windows
+1. Download and install Python from [python.org](https://www.python.org/downloads/)
+   - During installation, make sure to check "Add Python to PATH"
+   - Choose the option to install pip
+
+2. Install Git from [git-scm.com](https://git-scm.com/download/win)
+
+## Installation Steps
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/shane-reaume/pytest-playwright-learn-to-code.git
+   cd pytest-playwright-learn-to-code
+   ```
+
+2. Create and activate a virtual environment:
+
+   **Linux/macOS**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+   **Windows**:
+   ```cmd
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+
+3. Install dependencies:
+
+   **Linux/macOS**:
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+
+   **Windows**:
+   ```cmd
+   pip install -r requirements.txt
+   ```
+
+4. Install Playwright browsers:
+
+   **All Operating Systems**:
+   ```bash
+   playwright install
+   ```
 
 ## Running Tests
 
-We provide a simple command-line interface through `scripts.py`:
+Use the `scripts.py` command-line interface:
 
 ### Basic Usage
 
+**Linux/macOS**:
 ```bash
+python3 scripts.py run <test_name>
+```
+
+**Windows**:
+```cmd
 python scripts.py run <test_name>
 ```
 
 ### Available Test Commands
 
 - Run all tests:
-
   ```bash
-  python scripts.py run all
+  python3 scripts.py run all  # Linux/macOS
+  python scripts.py run all   # Windows
   ```
 
-- Run all tests in test_examples directory:
-
+- Run all learning example tests:
   ```bash
-  python scripts.py run test_examples
-  ```
-
-- Run specific test files:
-
-  ```bash
-  python scripts.py run test_unit_only
-  python scripts.py run login_scope
+  python3 scripts.py run learn_examples  # Linux/macOS
+  python scripts.py run learn_examples   # Windows
   ```
 
 ### Test Options
@@ -195,60 +148,76 @@ python scripts.py run <test_name>
 Add these flags to any test command:
 
 - `--headed`: Run tests in headed mode (visible browser)
-
   ```bash
-  python scripts.py run all --headed
+  python3 scripts.py run all --headed  # Linux/macOS
+  python scripts.py run all --headed   # Windows
   ```
 
 - `--debug`: Run tests in debug mode (slower execution)
-
   ```bash
-  python scripts.py run all --debug
+  python3 scripts.py run all --debug  # Linux/macOS
+  python scripts.py run all --debug   # Windows
   ```
 
 ### Help
 
 To see all available commands and options:
-
 ```bash
-python scripts.py help
+python3 scripts.py help  # Linux/macOS
+python scripts.py help   # Windows
 ```
 
-## Writing Tests
+## Learning Path
 
-Describe it! We use a BDD-style like syntax ( similar to Mocha or Jest) for better readability:
+The tests in the `learn_examples` directory are organized to follow a logical learning progression:
 
-```python
-@describe("Feature or component being tested")
-class TestSomething:
-    @it("should perform specific action")
-    def test_specific_action(self, luma_test_page):
-        # Your test code here
-        pass
-```
+1. Python Basics (`test_basics.py`)
+2. Data Types (`test_data_types.py`)
+3. Control Flow (`test_control_flow.py`)
+4. Functions (`test_functions.py`)
+5. Object-Oriented Programming Basics (`test_oop_basics.py`)
+6. Advanced OOP Concepts (`test_advanced_oop.py`)
+7. Modules and Packages (`test_modules_and_packages.py`)
+8. File I/O (`test_file_io.py`)
+9. Exception Handling (`test_exceptions_handling.py`)
+10. Advanced Concepts (`test_advanced_concepts.py`)
+11. Decorators and Context Managers (`test_decorators_and_context_managers.py`)
+12. Iterators and Generators (`test_iterators_and_generators.py`)
+13. Standard Library and Third-Party Packages (`test_standard_library_and_third_party.py`)
+14. Pytest Basics (`test_pytest_basics.py`)
+15. Playwright Integration (`test_playwright_integration.py`)
 
-### Available Fixtures
+Each test file contains examples and test cases that demonstrate the concepts in action.
 
-- `luma_test_page`: Fresh login for each test
-- `luma_test_class_page`: Single login shared across test class
-- Add your own fixtures in `conftest.py`
+## Troubleshooting
 
-## Best Practices
+### Linux
+- If you see "command not found: python", use `python3` instead
+- If you encounter browser launch issues, make sure all system dependencies are installed
+- For permission issues with `/usr/bin/env: 'python': No such file or directory`, try:
+  ```bash
+  sudo ln -s /usr/bin/python3 /usr/bin/python
+  ```
 
-1. Keep tests independent and isolated
-2. Use descriptive `@describe` and `@it` descriptions
-3. Organize tests by feature or component
-4. Utilize fixtures for common setup/teardown
-5. Add comments for complex test scenarios
+### macOS
+- If you see "command not found: python", try `python3` or reinstall Python using Homebrew
+- For M1/M2 Macs, you might need Rosetta 2 for some browser features:
+  ```bash
+  softwareupdate --install-rosetta
+  ```
+
+### Windows
+- If Python/pip is not recognized, verify that Python is added to PATH
+- For permission issues, try running Command Prompt as Administrator
+- If you see SSL errors, you might need to install certificates:
+  ```cmd
+  python -m pip install --upgrade certifi
+  ```
 
 ## Contributing
 
-Contributions to improve this template are welcome! Please submit issues or pull requests to the template repository.
+Feel free to submit issues and enhancement requests!
 
 ## License
 
-This template is licensed under the MIT License - see the LICENSE file for details.
-
-## Template Maintainers
-
-- [Shane Reaume](https://github.com/shane-reaume) 
+This project is licensed under the MIT License - see the LICENSE file for details. 

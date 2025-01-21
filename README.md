@@ -2,6 +2,12 @@
 
 A project for learning Python concepts through test-driven development, using Playwright for browser automation and pytest as the test runner. This project serves as both a learning resource and a practical example of Python testing practices.
 
+## Template repo for creating your own pytest-playwright project
+
+- [pytest-playwright-template](https://github.com/shane-reaume/pytest-playwright-template)
+- This framework is built on top of the [pytest-playwright](https://github.com/microsoft/playwright-pytest) project, recommended by Playwright.
+- We customized syntax with `describe` and `it` to make it more readable and easier to understand for those coming from other JavaScript based testing frameworks.
+
 ## Features
 
 - **Python Learning Examples**: Comprehensive test examples covering Python fundamentals to advanced concepts

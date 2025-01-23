@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pytest-playwright-learn-to-code"
+version = "0.1.0"
+description = "A project for learning Python concepts through test-driven development using Playwright"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+authors = [
+    { name = "Shane Reaume", email = "shane@shaneofalltrades.com" }
+]
+dependencies = [
+    "pytest>=7.0.0",
+    "pytest-playwright>=0.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.3.0",
+]
+
+[tool.pytest]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-s"
+markers = [
+    "describe: Mark a class as a test suite description",
+    "it: Mark a test method with a description of what it tests",
+]
+
+[tool.hatch]
+build.targets.wheel.packages = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+]
+ignore = []
+
+[tool.ruff.isort]
+known-first-party = ["tests"] 

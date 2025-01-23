@@ -13,7 +13,8 @@ A project for learning Python concepts through test-driven development, using Pl
 - **Python Learning Examples**: Comprehensive test examples covering Python fundamentals to advanced concepts
 - **Playwright Integration**: Browser automation examples using Playwright
 - **Test-Driven Learning**: Learn Python concepts through practical test cases
-- **Minimal Dependencies**: Uses `pytest-playwright` for all testing needs
+- **Modern Python Setup**: Uses `pyproject.toml` for dependency management and configuration
+- **Code Quality Tools**: Integrated Ruff for linting and code formatting
 
 ## Project Structure
 
@@ -21,16 +22,13 @@ A project for learning Python concepts through test-driven development, using Pl
 pytest-playwright-learn-to-code/
 ├── tests/
 │   ├── learn_examples/           # Python learning concept tests
-│   │   ├── test_basics.py       # Basic Python concepts
-│   │   ├── test_data_types.py   # Python data types
-│   │   ├── test_control_flow.py # Control flow examples
-│   │   ├── test_functions.py    # Function usage
-│   │   ├── test_oop_basics.py   # Basic OOP concepts
+│   │   ├── test_01_basics.py       # sorted in order of learning progression
+│   │   ├── test_02_data_types.py
 │   │   └── ... more concept tests
 │   └── conftest.py              # Shared fixtures and configurations
 ├── scripts.py                    # Test runner script
-├── pytest.ini                    # Pytest configuration
-└── requirements.txt              # Project dependencies
+├── pyproject.toml               # Project configuration and dependencies
+└── README.md                    # Project documentation
 ```
 
 ## Setup Requirements
@@ -100,24 +98,34 @@ pytest-playwright-learn-to-code/
    venv\Scripts\activate
    ```
 
-3. Install dependencies:
+3. Install the project with development dependencies:
 
    **Linux/macOS**:
    ```bash
-   pip3 install -r requirements.txt
+   pip3 install -e ".[dev]"
    ```
 
    **Windows**:
    ```cmd
-   pip install -r requirements.txt
+   pip install -e ".[dev]"
    ```
 
 4. Install Playwright browsers:
-
-   **All Operating Systems**:
    ```bash
    playwright install
    ```
+
+## Development Tools
+
+### Code Quality
+
+The project uses Ruff for linting and code formatting. Ruff is automatically installed with the development dependencies.
+
+To run Ruff:
+```bash
+ruff check .     # Check for issues
+ruff format .    # Format code
+```
 
 ## Running Tests
 

@@ -13,16 +13,17 @@ Each test demonstrates a specific concept with practical examples.
 """
 
 from playwright.sync_api import Page
-from tests.conftest import describe, it
-from tests.learn_examples.utils import learn_print as lprint  # Import our custom print function
+from tests.conftest import describe, it, lprint  # Import lprint from conftest
 
 # ====== Basic Python Examples ======
 
 # 1. Hello World and Basic Output
-lprint("\n=== Hello World Examples ===")
+lprint("=== Hello World Examples ===")
 lprint("Hello, World!")  # The traditional first program
 lprint("Multiple", "arguments", "are", "separated", "by", "spaces")  # prints with spaces between args
 lprint("Line 1\nLine 2")  # \n creates a new line
+hw = ("H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!") # list of characters
+lprint(*hw, sep="") # using *args to unpack the list and sep="" to remove the spaces
 
 # 2. Comments
 # This is a single-line comment

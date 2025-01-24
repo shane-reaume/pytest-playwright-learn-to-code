@@ -31,8 +31,12 @@ markers = [
     "it: Mark a test method with a description of what it tests",
 ]
 
-[tool.hatch]
-build.targets.wheel.packages = ["tests"]
+[tool.hatch.build.targets.wheel]
+packages = ["tests"]
+include = [
+    "/tests",
+    "/tests/**/*.py",
+]
 
 [tool.ruff]
 line-length = 100

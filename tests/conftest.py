@@ -22,13 +22,13 @@ def learn_print(*args: Any, **kwargs: Any) -> None:
     
     # Get the sep and end parameters or use defaults
     sep = kwargs.pop('sep', ' ')
-    end = kwargs.pop('end', '\n')
+    end = kwargs.pop('end', ' ')
     
     # Print to stderr to bypass pytest capture
     print(file=sys.stderr)  # Add a blank line before output
-    print(separator, file=sys.stderr)
+    #print(separator, file=sys.stderr)
     print(*args, sep=sep, end=end, file=sys.stderr, flush=True, **kwargs)
-    print(separator, file=sys.stderr)
+    # print(separator, file=sys.stderr)
     print(file=sys.stderr)  # Add a blank line after output
 
 # Alias for shorter name

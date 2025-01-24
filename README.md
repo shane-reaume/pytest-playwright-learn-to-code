@@ -1,6 +1,8 @@
 # Python Learning and Testing with Pytest-Playwright
 
-A project for learning Python concepts through test-driven development, using Playwright for browser automation and pytest as the test runner. This project serves as both a learning resource and a practical example of Python testing practices.
+🚧 **Work in Progress** 🚧
+
+This is an evolving project that explores innovative ways to learn Python interactively, specifically targeting Python QA engineers and developers who want to learn pytest. The project combines fun interactive learning with real-world testing scenarios.
 
 ## Template repo for creating your own pytest-playwright project
 
@@ -10,6 +12,7 @@ A project for learning Python concepts through test-driven development, using Pl
 
 ## Features
 
+- **Interactive Learning**: Learn Python through interactive CLI-based lessons
 - **Python Learning Examples**: Comprehensive test examples covering Python fundamentals to advanced concepts
 - **Playwright Integration**: Browser automation examples using Playwright
 - **Test-Driven Learning**: Learn Python concepts through practical test cases
@@ -21,14 +24,17 @@ A project for learning Python concepts through test-driven development, using Pl
 ```
 pytest-playwright-learn-to-code/
 ├── tests/
-│   ├── learn_examples/           # Python learning concept tests
-│   │   ├── test_01_basics.py       # sorted in order of learning progression
+│   ├── interactive_examples/    # Interactive learning modules
+│   │   ├── 01_basics.py        # Interactive Python basics
+│   │   └── ... more lessons
+│   ├── test_examples/          # Real-world test examples
+│   │   ├── test_01_basics.py   # Basic Python concepts
 │   │   ├── test_02_data_types.py
-│   │   └── ... more concept tests
-│   └── conftest.py              # Shared fixtures and configurations
-├── scripts.py                    # Test runner script
-├── pyproject.toml               # Project configuration and dependencies
-└── README.md                    # Project documentation
+│   │   └── ... more examples
+│   └── conftest.py            # Shared fixtures and configurations
+├── scripts.py                  # Test runner script
+├── pyproject.toml             # Project configuration and dependencies
+└── README.md                  # Project documentation
 ```
 
 ## Setup Requirements
@@ -131,30 +137,21 @@ ruff format .    # Format code
 
 Use the `scripts.py` command-line interface:
 
-### Basic Usage
-
-**Linux/macOS**:
-```bash
-python3 scripts.py run <test_name>
-```
-
-**Windows**:
-```cmd
-python scripts.py run <test_name>
-```
-
-### Available Test Commands
+### Available Commands
 
 - Run all tests:
   ```bash
-  python3 scripts.py run all  # Linux/macOS
-  python scripts.py run all   # Windows
+  python3 scripts.py run all
   ```
 
-- Run all learning example tests:
+- Run interactive lessons:
   ```bash
-  python3 scripts.py run learn_examples  # Linux/macOS
-  python scripts.py run learn_examples   # Windows
+  python3 scripts.py run interactive
+  ```
+
+- Run test examples:
+  ```bash
+  python3 scripts.py run test_examples
   ```
 
 ### Test Options
@@ -181,13 +178,36 @@ python3 scripts.py help  # Linux/macOS
 python scripts.py help   # Windows
 ```
 
-## Learning Path
+## Learning Paths
 
-The tests in the `learn_examples` directory are organized to follow a logical learning progression:
+### Interactive Learning (Recommended for Beginners)
 
-1. Python Basics (`test_basics.py`)
-2. Data Types (`test_data_types.py`)
-3. Control Flow (`test_control_flow.py`)
+Start with the interactive learning path for a hands-on experience:
+
+```bash
+# Run the interactive Python basics lesson
+python3 scripts.py run interactive_basics  # Linux/macOS
+python scripts.py run interactive_basics   # Windows
+
+# Run all interactive lessons
+python3 scripts.py run interactive         # Linux/macOS
+python scripts.py run interactive          # Windows
+```
+
+The interactive lessons will:
+- Present concepts one at a time
+- Ask you questions about what you're learning
+- Provide immediate feedback
+- Give helpful explanations
+- Show key takeaways at the end of each lesson
+
+### Test Examples
+
+The `test_examples` directory contains real-world testing scenarios that demonstrate both Python concepts and testing practices:
+
+1. Python Basics (`test_01_basics.py`)
+2. Data Types (`test_02_data_types.py`)
+3. Control Flow (`test_03_control_flow.py`)
 4. Functions (`test_functions.py`)
 5. Object-Oriented Programming Basics (`test_oop_basics.py`)
 6. Advanced OOP Concepts (`test_advanced_oop.py`)
@@ -201,7 +221,7 @@ The tests in the `learn_examples` directory are organized to follow a logical le
 14. Pytest Basics (`test_pytest_basics.py`)
 15. Playwright Integration (`test_playwright_integration.py`)
 
-Each test file contains examples and test cases that demonstrate the concepts in action.
+Each test file contains practical examples and test cases that demonstrate both Python concepts and testing best practices in action.
 
 ## Troubleshooting
 

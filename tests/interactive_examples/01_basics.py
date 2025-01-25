@@ -71,14 +71,15 @@ class TestPythonBasicsInteractive:
         color_print(f"\n{BOLD}Question 1: Basic Print{RESET}")
         color_print("Look at these print examples:", YELLOW)
         print_code_block("""
-# Basic print statement
-print("Hello, World!")
+            # Basic print statement
+            print("Hello, World!")
 
-# Print with multiple arguments
-print("Hello", "Python", "World")
+            # Print with multiple arguments
+            print("Hello", "Python", "World")
 
-# Print with special characters
-print("Line 1\\nLine 2\\tTabbed")""")
+            # Print with special characters
+            print("Line 1\\nLine 2\\tTabbed")
+                         """)
         answer = get_user_input(f"{YELLOW}What character creates a new line in Python strings? (hint: it's a special character): {RESET}")
         check_answer(
             answer,
@@ -96,29 +97,29 @@ print("Line 1\\nLine 2\\tTabbed")""")
         color_print(f"\n{BOLD}Question 1: Comments{RESET}")
         color_print("Look at these different types of comments:", YELLOW)
         print_code_block("""
-# This is a single-line comment
-print("Hello")  # This is an end-of-line comment
+            # This is a single-line comment
+            print("Hello")  # This is an end-of-line comment
 
-# Multiple single-line comments
-# can be used to create
-# longer explanations
+            # Multiple single-line comments
+            # can be used to create
+            # longer explanations
 
-'''
-This is a multi-line comment (string)
-It can span multiple lines
-And is useful for longer explanations
-'''
+            '''
+            This is a multi-line comment (string)
+            It can span multiple lines
+            And is useful for longer explanations
+            '''
 
-def greet(name):
-    '''
-    This is a docstring - it documents what a function does
-    Args:
-        name: The name to greet
-    Returns:
-        A greeting message
-    '''
-    return f"Hello, {name}!"
-""")
+            def greet(name):
+                '''
+                This is a docstring - it documents what a function does
+                Args:
+                    name: The name to greet
+                Returns:
+                    A greeting message
+                '''
+                return f"Hello, {name}!"
+                         """)
         answer = get_user_input(f"{YELLOW}What character starts a single-line comment in Python? {RESET}")
         check_answer(
             answer,
@@ -136,21 +137,22 @@ def greet(name):
         color_print(f"\n{BOLD}Question 1: Code Execution{RESET}")
         color_print("Look at this simple program:", YELLOW)
         print_code_block("""
-# Program starts here
-print("Starting program...")
+            # Program starts here
+            print("Starting program...")
 
-# Variables are created when assigned
-message = "Hello from Python!"
-print(message)
+            # Variables are created when assigned
+            message = "Hello from Python!"
+            print(message)
 
-# Functions must be defined before use
-def say_goodbye():
-    print("Goodbye!")
+            # Functions must be defined before use
+            def say_goodbye():
+                print("Goodbye!")
 
-# Function calls execute the function
-say_goodbye()
+            # Function calls execute the function
+            say_goodbye()
 
-print("Program finished.")""")
+            print("Program finished.")
+                         """)
         answer = get_user_input(f"{YELLOW}In Python, can you call a function before it's defined (above its definition)? (yes/no): {RESET}")
         check_answer(
             answer,
@@ -162,18 +164,19 @@ print("Program finished.")""")
         color_print(f"\n{BOLD}Question 2: Indentation{RESET}")
         color_print("Look at how Python uses indentation:", YELLOW)
         print_code_block("""
-def greet(time_of_day):
-    # This is indented - it's part of the function
-    print(f"Good {time_of_day}!")
-    if time_of_day == "morning":
-        # This is indented twice - it's inside the if statement
-        print("Would you like some coffee?")
-    # Back to function level
-    print("Have a great day!")
+            def greet(time_of_day):
+                # This is indented - it's part of the function
+                print(f"Good {time_of_day}!")
+                if time_of_day == "morning":
+                    # This is indented twice - it's inside the if statement
+                    print("Would you like some coffee?")
+                # Back to function level
+                print("Have a great day!")
 
-# Not indented - outside the function
-print("Program starting...")
-greet("morning")""")
+            # Not indented - outside the function
+            print("Program starting...")
+            greet("morning")
+                         """)
         answer = get_user_input(f"{YELLOW}What does Python use to define code blocks? (hint: it's not curly braces) {RESET}")
         check_answer(
             answer,
@@ -184,19 +187,20 @@ greet("morning")""")
         color_print(f"\n{BOLD}🎉 Congratulations! You've completed the Python basics lesson!{RESET}", GREEN)
         color_print("\nKey takeaways:", YELLOW)
         print_code_block("""
-# 1. Printing Output
-print("Hello, World!")              # Basic printing
-print("Line 1\\nLine 2")            # Special characters
+            # 1. Printing Output
+            print("Hello, World!")              # Basic printing
+            print("Line 1\\nLine 2")            # Special characters
 
-# 2. Comments
-# Single-line comments start with #
-'''
-Multi-line comments use
-triple quotes
-'''
+            # 2. Comments
+            # Single-line comments start with #
+            '''
+            Multi-line comments use
+            triple quotes
+            '''
 
-# 3. Program Flow
-def my_function():                  # Function definition
-    print("Indented code")          # Code blocks use indentation
-    if True:                        # Control structures
-        print("More indentation")   # Nested code blocks""") 
+            # 3. Program Flow
+            def my_function():                  # Function definition
+                print("Indented code")          # Code blocks use indentation
+                if True:                        # Control structures
+                    print("More indentation")   # Nested code blocks
+                         """) 

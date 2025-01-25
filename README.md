@@ -13,6 +13,10 @@ This is an evolving project that explores innovative ways to learn Python intera
 ## Features
 
 - **Interactive Learning**: Learn Python through interactive CLI-based lessons
+  * Syntax highlighting with customizable themes
+  * Clear, consistent formatting for better readability
+  * Immediate feedback on exercises
+  * Progress tracking and key takeaways
 - **Python Learning Examples**: Comprehensive test examples covering Python fundamentals to advanced concepts
 - **Playwright Integration**: Browser automation examples using Playwright
 - **Test-Driven Learning**: Learn Python concepts through practical test cases
@@ -200,6 +204,20 @@ The interactive lessons will:
 - Provide immediate feedback
 - Give helpful explanations
 - Show key takeaways at the end of each lesson
+
+#### Theme Selection
+
+When you start your first interactive lesson, you'll be prompted to choose a syntax highlighting theme. Available themes include:
+- Monokai (default) - Dark theme with vibrant colors
+- One Dark - Atom-inspired dark theme
+- Solarized (dark/light) - Popular theme with carefully chosen colors
+- Dracula - Modern dark theme
+- Gruvbox (dark/light) - Retro groove theme
+- Nord - Arctic-inspired dark theme
+- VS - Visual Studio-inspired light theme
+- Zenburn - Low contrast dark theme
+
+Your theme choice persists across all interactive lessons in the same session, providing a consistent learning experience.
 
 ### Test Examples
 

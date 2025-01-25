@@ -2,37 +2,33 @@ import pytest
 import sys
 import time
 from typing import Any
+from .utils import (
+    color_print, get_user_input, select_theme, 
+    BOLD, YELLOW, RESET, lprint
+)
 
 # Short-hand decorators for test organization
 describe = pytest.mark.describe
 it = pytest.mark.it
 usefixture = pytest.mark.usefixtures
 
-def learn_print(*args: Any, **kwargs: Any) -> None:
-    """
-    Custom print function for learning examples that ensures output is visible
-    during test execution. This bypasses pytest's output capture.
-    
-    Args:
-        *args: Variable length argument list, same as built-in print()
-        **kwargs: Arbitrary keyword arguments, same as built-in print()
-    """
-    # Create a separator line for better visibility
-    separator = "-" * 80
-    
-    # Get the sep and end parameters or use defaults
-    sep = kwargs.pop('sep', ' ')
-    end = kwargs.pop('end', ' ')
-    
-    # Print to stderr to bypass pytest capture
-    print(file=sys.stderr)  # Add a blank line before output
-    #print(separator, file=sys.stderr)
-    print(*args, sep=sep, end=end, file=sys.stderr, flush=True, **kwargs)
-    # print(separator, file=sys.stderr)
-    print(file=sys.stderr)  # Add a blank line after output
+# Global flag to track if theme selection has been offered
+_theme_selection_done = False
 
-# Alias for shorter name
-lprint = learn_print
+@pytest.fixture(scope="session", autouse=True)
+def interactive_theme():
+    """
+    Session-wide fixture that handles theme selection for interactive tests.
+    This runs once at the start of the test session.
+    """
+    global _theme_selection_done
+    if not _theme_selection_done:
+        color_print(f"\n{BOLD}=== Welcome to Interactive Python Learning ==={RESET}", YELLOW)
+        color_print("Would you like to choose a syntax highlighting theme for code examples?")
+        if get_user_input(f"{YELLOW}Choose theme? (yes/no): {RESET}").startswith('y'):
+            select_theme()
+        _theme_selection_done = True
+    yield
 
 @pytest.fixture
 def luma_test_page(page):

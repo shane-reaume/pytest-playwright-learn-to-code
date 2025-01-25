@@ -6,68 +6,26 @@ Each concept is presented with code examples and interactive questions
 to test understanding.
 """
 
-from tests.conftest import describe, it, lprint
+from tests.conftest import describe, it
+from tests.utils import (
+    print_code_block, get_user_input, check_answer,
+    print_section_header, print_subsection_header, print_instruction,
+    print_success, print_error, print_info
+)
 import time
-
-# ANSI color codes
-BLUE = "\033[94m"      # General text
-GREEN = "\033[92m"     # Success messages
-RED = "\033[91m"       # Error messages
-YELLOW = "\033[33m"    # Questions and prompts
-CYAN = "\033[96m"      # Code blocks
-BOLD = "\033[1m"       # Headers
-RESET = "\033[0m"      # Reset all formatting
-
-def color_print(text, color=BLUE):
-    """Print text in color"""
-    lprint(f"{color}{text}{RESET}")
-
-def print_code_block(code, indent=0):
-    """Print a code block with proper indentation"""
-    # Add a newline before the code block
-    lprint("")
-    
-    # Split into lines
-    lines = code.strip().split('\n')
-    indent_str = " " * indent
-    
-    # Print each line
-    for line in lines:
-        if line.strip():
-            # Add consistent indentation and color the entire line
-            lprint(f"{indent_str}{CYAN}{line.rstrip()}{RESET}")
-        else:
-            lprint("")  # Print empty lines as-is
-    
-    # Add a newline after the code block
-    lprint("")
-
-def get_user_input(prompt):
-    """Get user input with a prompt"""
-    lprint("\n" + prompt)
-    return input().strip().lower()
-
-def check_answer(user_answer, correct_answers, explanation):
-    """Check user answer and provide feedback"""
-    if user_answer in correct_answers:
-        color_print(f"\n✅ Correct! {explanation}", GREEN)
-        return True
-    else:
-        color_print(f"\n❌ Not quite. {explanation}", RED)
-        return False
 
 @describe("Interactive Python Data Types")
 class TestPythonDataTypesInteractive:
     
     @it("teaches about numeric types")
     def test_numeric_types(self):
-        color_print(f"\n{BOLD}=== Welcome to Python Data Types - Part 1: Numbers ==={RESET}", YELLOW)
-        color_print("Let's learn about Python's numeric types in detail.")
+        print_section_header("Welcome to Python Data Types - Part 1: Numbers")
+        print_info("Let's learn about Python's numeric types in detail.")
         time.sleep(1)
 
         # Question 1: Integer operations
-        color_print(f"\n{BOLD}Question 1: Integer Operations{RESET}")
-        color_print("Look at these integer operations:", YELLOW)
+        print_subsection_header("Question 1: Integer Operations")
+        print_instruction("Look at these integer operations:")
         print_code_block("""
             # Integer division and modulo
             x = 17
@@ -83,7 +41,7 @@ class TestPythonDataTypesInteractive:
             print(f"{x} in binary is {binary}")
             print(f"{x} in hexadecimal is {hexadecimal}")
                          """)
-        answer = get_user_input(f"{YELLOW}What operator gives you the integer division result (no decimal)? {RESET}")
+        answer = get_user_input("What operator gives you the integer division result (no decimal)?")
         check_answer(
             answer,
             ['//', 'double slash', 'floor division'],
@@ -91,8 +49,8 @@ class TestPythonDataTypesInteractive:
         )
 
         # Question 2: Float operations
-        color_print(f"\n{BOLD}Question 2: Float Operations{RESET}")
-        color_print("Look at these floating-point operations:", YELLOW)
+        print_subsection_header("Question 2: Float Operations")
+        print_instruction("Look at these floating-point operations:")
         print_code_block("""
             import math
 
@@ -111,7 +69,7 @@ class TestPythonDataTypesInteractive:
             print(f"π as percentage: {pi:.2%}")  # 314.16%
             print(f"e in scientific: {e:e}")     # 2.718280e+00
                          """)
-        answer = get_user_input(f"{YELLOW}What function rounds a float down to the nearest integer? {RESET}")
+        answer = get_user_input("What function rounds a float down to the nearest integer?")
         check_answer(
             answer,
             ['floor', 'math.floor', 'floor()', 'math.floor()'],
@@ -119,8 +77,8 @@ class TestPythonDataTypesInteractive:
         )
 
         # Question 3: Complex numbers
-        color_print(f"\n{BOLD}Question 3: Complex Numbers{RESET}")
-        color_print("Look at these complex number operations:", YELLOW)
+        print_subsection_header("Question 3: Complex Numbers")
+        print_instruction("Look at these complex number operations:")
         print_code_block("""
             # Complex numbers (real + imaginary)
             z1 = 3 + 4j      # Direct definition
@@ -137,22 +95,41 @@ class TestPythonDataTypesInteractive:
             print(f"|{z1}| = {magnitude}")
             print(f"Conjugate of {z1} is {conjugate}")
                          """)
-        answer = get_user_input(f"{YELLOW}What letter is commonly used for the imaginary unit in Python? {RESET}")
+        answer = get_user_input("What letter is commonly used for the imaginary unit in Python?")
         check_answer(
             answer,
             ['j', 'j unit'],
             "Python uses 'j' for the imaginary unit (some other languages use 'i'). So 3+4j represents a complex number."
         )
 
+        print_success("🎉 Congratulations! You've completed the numeric types lesson!")
+        print_info("Key takeaways:")
+        print_code_block("""
+            # 1. Integer Operations
+            x // y              # Integer division
+            x % y               # Modulo (remainder)
+            bin(x), hex(x)      # Binary and hex representations
+
+            # 2. Float Operations
+            round(3.14159, 2)   # Round to decimal places
+            math.floor(3.7)     # Round down to integer
+            math.ceil(3.2)      # Round up to integer
+
+            # 3. Complex Numbers
+            z = 3 + 4j          # Complex number literal
+            z.real, z.imag      # Access parts
+            abs(z)              # Get magnitude
+                         """)
+
     @it("teaches about text types")
     def test_text_types(self):
-        color_print(f"\n{BOLD}=== Part 2: Text Types (Strings) ==={RESET}")
-        color_print("Let's learn about Python's string type in detail.")
+        print_section_header("Part 2: Text Types (Strings)")
+        print_info("Let's learn about Python's string type in detail.")
         time.sleep(1)
 
         # Question 1: String creation
-        color_print(f"\n{BOLD}Question 1: String Creation{RESET}")
-        color_print("Look at these ways to create strings:", YELLOW)
+        print_subsection_header("Question 1: String Creation")
+        print_instruction("Look at these ways to create strings:")
         print_code_block("""
             # Different ways to create strings
             single = 'Single quotes'
@@ -170,7 +147,7 @@ class TestPythonDataTypesInteractive:
             unicode = "Hello 🌍"  # Unicode string
             bytes_str = b"Hello"  # Bytes string
                          """)
-        answer = get_user_input(f"{YELLOW}What prefix creates a 'raw' string where backslashes are treated literally? {RESET}")
+        answer = get_user_input("What prefix creates a 'raw' string where backslashes are treated literally?")
         check_answer(
             answer,
             ['r', 'r prefix', 'raw'],
@@ -178,8 +155,8 @@ class TestPythonDataTypesInteractive:
         )
 
         # Question 2: String methods
-        color_print(f"\n{BOLD}Question 2: String Methods{RESET}")
-        color_print("Look at these string operations:", YELLOW)
+        print_subsection_header("Question 2: String Methods")
+        print_instruction("Look at these string operations:")
         print_code_block("""
             text = "  Python Programming  "
 
@@ -202,7 +179,7 @@ class TestPythonDataTypesInteractive:
             position = text.find('Pro')     # 8
             count = text.count('m')         # 2
                          """)
-        answer = get_user_input(f"{YELLOW}What method removes whitespace from both ends of a string? {RESET}")
+        answer = get_user_input("What method removes whitespace from both ends of a string?")
         check_answer(
             answer,
             ['strip', 'strip()', '.strip', '.strip()'],
@@ -211,13 +188,13 @@ class TestPythonDataTypesInteractive:
 
     @it("teaches about boolean type")
     def test_boolean_type(self):
-        color_print(f"\n{BOLD}=== Part 3: Boolean Type and Truth Values ==={RESET}")
-        color_print("Let's learn about Python's boolean type and truth testing.")
+        print_section_header("Part 3: Boolean Type and Truth Values")
+        print_info("Let's learn about Python's boolean type and truth testing.")
         time.sleep(1)
 
         # Question 1: Boolean operations
-        color_print(f"\n{BOLD}Question 1: Boolean Operations{RESET}")
-        color_print("Look at these boolean operations:", YELLOW)
+        print_subsection_header("Question 1: Boolean Operations")
+        print_instruction("Look at these boolean operations:")
         print_code_block("""
             # Basic boolean values
             is_ready = True
@@ -239,7 +216,7 @@ class TestPythonDataTypesInteractive:
             is_equal = x == y             # False
             is_not_equal = x != y         # True
                          """)
-        answer = get_user_input(f"{YELLOW}What happens in 'x and y' if x is False? {RESET}")
+        answer = get_user_input("What happens in 'x and y' if x is False?")
         check_answer(
             answer,
             ['short circuit', 'short-circuit', 'skips y', 'y not evaluated', 'returns false', 'returns x'],
@@ -247,8 +224,8 @@ class TestPythonDataTypesInteractive:
         )
 
         # Question 2: Truth values
-        color_print(f"\n{BOLD}Question 2: Truth Values{RESET}")
-        color_print("Look at how Python determines truth values:", YELLOW)
+        print_subsection_header("Question 2: Truth Values")
+        print_instruction("Look at how Python determines truth values:")
         print_code_block("""
             # Values considered False:
             bool(None)         # False
@@ -273,28 +250,26 @@ class TestPythonDataTypesInteractive:
             if name:               # Check for non-empty string
                 print(f"Hello, {name}")
                          """)
-        answer = get_user_input(f"{YELLOW}What built-in function converts other types to boolean? {RESET}")
+        answer = get_user_input("What built-in function converts other types to boolean?")
         check_answer(
             answer,
             ['bool', 'bool()', 'bool function'],
             "The bool() function converts values to True or False. Empty/zero values become False, others become True."
         )
 
-        color_print(f"\n{BOLD}🎉 Congratulations! You've completed the Python data types lesson!{RESET}", GREEN)
-        color_print("\nKey takeaways:", YELLOW)
+        print_success("🎉 Congratulations! You've completed the Python data types lesson!")
+        print_info("Key takeaways:")
         print_code_block("""
-            # 1. Numeric Types
-            x = 42              # int: whole numbers
-            y = 3.14           # float: decimal numbers
-            z = 3 + 4j         # complex: real + imaginary
+            # 1. Boolean Operations
+            and_result = True and False    # False
+            or_result = True or False      # True
+            not_result = not True         # False
 
-            # 2. Text Type (str)
-            text = "Hello"      # Basic string
-            f"{x} = {y}"       # f-string formatting
-            text.upper()       # String methods
+            # 2. Truth Values
+            bool(42)           # True (non-zero numbers)
+            bool("Hello")      # True (non-empty string)
 
             # 3. Boolean Type
             valid = True        # Basic boolean
             bool("Hello")      # Truth testing
-            x > y and y < z    # Boolean operations
                          """) 

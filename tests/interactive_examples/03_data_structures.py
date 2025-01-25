@@ -25,69 +25,27 @@ This module covers Python's core data structures through practical test examples
 Each test demonstrates a specific concept with practical examples.
 """
 
-from tests.conftest import describe, it, lprint
+from tests.conftest import describe, it
+from tests.utils import (
+    print_code_block, get_user_input, check_answer,
+    print_section_header, print_subsection_header, print_instruction,
+    print_success, print_error, print_info
+)
 import time
 from collections import namedtuple
-
-# ANSI color codes
-BLUE = "\033[94m"      # General text
-GREEN = "\033[92m"     # Success messages
-RED = "\033[91m"       # Error messages
-YELLOW = "\033[33m"    # Questions and prompts
-CYAN = "\033[96m"      # Code blocks
-BOLD = "\033[1m"       # Headers
-RESET = "\033[0m"      # Reset all formatting
-
-def color_print(text, color=BLUE):
-    """Print text in color"""
-    lprint(f"{color}{text}{RESET}")
-
-def print_code_block(code, indent=0):
-    """Print a code block with proper indentation"""
-    # Add a newline before the code block
-    lprint("")
-    
-    # Split into lines
-    lines = code.strip().split('\n')
-    indent_str = " " * indent
-    
-    # Print each line
-    for line in lines:
-        if line.strip():
-            # Add consistent indentation and color the entire line
-            lprint(f"{indent_str}{CYAN}{line.rstrip()}{RESET}")
-        else:
-            lprint("")  # Print empty lines as-is
-    
-    # Add a newline after the code block
-    lprint("")
-
-def get_user_input(prompt):
-    """Get user input with a prompt"""
-    lprint("\n" + prompt)
-    return input().strip().lower()
-
-def check_answer(user_answer, correct_answers, explanation):
-    """Check user answer and provide feedback"""
-    if user_answer in correct_answers:
-        color_print(f"\n✅ Correct! {explanation}", GREEN)
-        return True
-    else:
-        color_print(f"\n❌ Not quite. {explanation}", RED)
-        return False
 
 @describe("Interactive Python Data Structures")
 class TestPythonDataStructuresInteractive:
     
     @it("teaches about lists and list operations")
     def test_lists(self):
-        color_print(f"\n{BOLD}=== Welcome to Python Data Structures - Part 1: Lists ==={RESET}", YELLOW)
-        color_print("Let's learn about Python lists in detail.")
+        print_section_header("Welcome to Python Data Structures - Part 1: Lists")
+        print_info("Let's learn about Python lists in detail.")
         time.sleep(1)
 
         # Question 1: List creation and modification
-        color_print(f"\n{BOLD}Question 1: List Creation and Modification{RESET}")
-        color_print("Look at these list operations:", YELLOW)
+        print_subsection_header("Question 1: List Creation and Modification")
+        print_instruction("Look at these list operations:")
         print_code_block("""
             # Creating lists
             numbers = [1, 2, 3, 4, 5]
@@ -104,7 +62,7 @@ class TestPythonDataStructuresInteractive:
             numbers.remove(0)       # Remove first occurrence of 0
             del numbers[0]          # Delete at index
                          """)
-        answer = get_user_input(f"{YELLOW}Which method adds a single element to the end of a list? {RESET}")
+        answer = get_user_input("Which method adds a single element to the end of a list?")
         check_answer(
             answer,
             ['append', 'append()', '.append', '.append()'],
@@ -112,8 +70,8 @@ class TestPythonDataStructuresInteractive:
         )
 
         # Question 2: List slicing
-        color_print(f"\n{BOLD}Question 2: List Slicing{RESET}")
-        color_print("Look at these list slicing operations:", YELLOW)
+        print_subsection_header("Question 2: List Slicing")
+        print_instruction("Look at these list slicing operations:")
         print_code_block("""
             numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
             
@@ -130,7 +88,7 @@ class TestPythonDataStructuresInteractive:
             last = numbers[-1]            # 9
             except_last = numbers[:-1]    # [0, 1, 2, 3, 4, 5, 6, 7, 8]
                          """)
-        answer = get_user_input(f"{YELLOW}What step value in slicing reverses a list? {RESET}")
+        answer = get_user_input("What step value in slicing reverses a list?")
         check_answer(
             answer,
             ['-1', 'negative 1', '-1 step'],
@@ -138,8 +96,8 @@ class TestPythonDataStructuresInteractive:
         )
 
         # Question 3: List comprehensions
-        color_print(f"\n{BOLD}Question 3: List Comprehensions{RESET}")
-        color_print("Look at these list comprehension examples:", YELLOW)
+        print_subsection_header("Question 3: List Comprehensions")
+        print_instruction("Look at these list comprehension examples:")
         print_code_block("""
             numbers = [1, 2, 3, 4, 5]
             
@@ -159,7 +117,7 @@ class TestPythonDataStructuresInteractive:
             processed = [str(x) + '!' for x in numbers if x > 2]
             # ['3!', '4!', '5!']
                          """)
-        answer = get_user_input(f"{YELLOW}What character surrounds a list comprehension? {RESET}")
+        answer = get_user_input("What character surrounds a list comprehension?")
         check_answer(
             answer,
             ['[]', 'square brackets', 'brackets'],
@@ -168,13 +126,13 @@ class TestPythonDataStructuresInteractive:
 
     @it("teaches about tuples and their immutability")
     def test_tuples(self):
-        color_print(f"\n{BOLD}=== Part 2: Tuples ==={RESET}")
-        color_print("Let's learn about Python tuples and their special properties.")
+        print_section_header("=== Part 2: Tuples ===")
+        print_info("Let's learn about Python tuples and their special properties.")
         time.sleep(1)
 
         # Question 1: Tuple basics
-        color_print(f"\n{BOLD}Question 1: Tuple Basics{RESET}")
-        color_print("Look at these tuple operations:", YELLOW)
+        print_subsection_header("Question 1: Tuple Basics")
+        print_instruction("Look at these tuple operations:")
         print_code_block("""
             # Creating tuples
             empty = ()
@@ -192,7 +150,7 @@ class TestPythonDataStructuresInteractive:
             count = numbers.count(1)    # Count occurrences: 1
             index = numbers.index(3)    # Find index: 2
                          """)
-        answer = get_user_input(f"{YELLOW}What do you need to add to make a single-element tuple? {RESET}")
+        answer = get_user_input("What do you need to add to make a single-element tuple?")
         check_answer(
             answer,
             ['comma', ',', 'trailing comma'],
@@ -200,8 +158,8 @@ class TestPythonDataStructuresInteractive:
         )
 
         # Question 2: Named tuples
-        color_print(f"\n{BOLD}Question 2: Named Tuples{RESET}")
-        color_print("Look at these named tuple examples:", YELLOW)
+        print_subsection_header("Question 2: Named Tuples")
+        print_instruction("Look at these named tuple examples:")
         print_code_block("""
             from collections import namedtuple
             
@@ -222,7 +180,7 @@ class TestPythonDataStructuresInteractive:
             # Converting to dictionary
             point_dict = p1._asdict()  # {'x': 1, 'y': 2}
                          """)
-        answer = get_user_input(f"{YELLOW}What module provides named tuples in Python? {RESET}")
+        answer = get_user_input("What module provides named tuples in Python?")
         check_answer(
             answer,
             ['collections', 'collections module'],
@@ -230,8 +188,8 @@ class TestPythonDataStructuresInteractive:
         )
 
         # Question 3: Tuple unpacking
-        color_print(f"\n{BOLD}Question 3: Tuple Unpacking{RESET}")
-        color_print("Look at these tuple unpacking examples:", YELLOW)
+        print_subsection_header("Question 3: Tuple Unpacking")
+        print_instruction("Look at these tuple unpacking examples:")
         print_code_block("""
             # Basic unpacking
             coordinates = (1, 2, 3)
@@ -248,7 +206,7 @@ class TestPythonDataStructuresInteractive:
             a, b = 1, 2
             a, b = b, a          # Swap values using tuple unpacking
                          """)
-        answer = get_user_input(f"{YELLOW}In tuple unpacking, what symbol is used to collect multiple remaining values into a list? {RESET}")
+        answer = get_user_input("In tuple unpacking, what symbol is used to collect multiple remaining values into a list?")
         check_answer(
             answer,
             ['*', 'asterisk'],
@@ -257,13 +215,13 @@ class TestPythonDataStructuresInteractive:
 
     @it("teaches about sets and set operations")
     def test_sets(self):
-        color_print(f"\n{BOLD}=== Part 3: Sets ==={RESET}")
-        color_print("Let's learn about Python sets and their operations.")
+        print_section_header("=== Part 3: Sets ===")
+        print_info("Let's learn about Python sets and their operations.")
         time.sleep(1)
 
         # Question 1: Set basics
-        color_print(f"\n{BOLD}Question 1: Set Basics{RESET}")
-        color_print("Look at these set operations:", YELLOW)
+        print_subsection_header("Question 1: Set Basics")
+        print_instruction("Look at these set operations:")
         print_code_block("""
             # Creating sets
             empty = set()                    # Empty set
@@ -280,7 +238,7 @@ class TestPythonDataStructuresInteractive:
             is_present = 5 in numbers        # True
             not_present = 10 not in numbers  # True
                          """)
-        answer = get_user_input(f"{YELLOW}What method removes an element from a set without raising an error if it's missing? {RESET}")
+        answer = get_user_input("What method removes an element from a set without raising an error if it's missing?")
         check_answer(
             answer,
             ['discard', 'discard()', '.discard', '.discard()'],
@@ -288,8 +246,8 @@ class TestPythonDataStructuresInteractive:
         )
 
         # Question 2: Set operations
-        color_print(f"\n{BOLD}Question 2: Set Operations{RESET}")
-        color_print("Look at these set mathematical operations:", YELLOW)
+        print_subsection_header("Question 2: Set Operations")
+        print_instruction("Look at these set mathematical operations:")
         print_code_block("""
             set1 = {1, 2, 3, 4}
             set2 = {3, 4, 5, 6}
@@ -310,7 +268,7 @@ class TestPythonDataStructuresInteractive:
             is_subset = {1, 2}.issubset(set1)      # True
             is_superset = set1.issuperset({1, 2})  # True
                          """)
-        answer = get_user_input(f"{YELLOW}What operator (|) performs the union of two sets? {RESET}")
+        answer = get_user_input("What operator (|) performs the union of two sets?")
         check_answer(
             answer,
             ['|', 'pipe', 'vertical bar', 'or'],
@@ -318,8 +276,8 @@ class TestPythonDataStructuresInteractive:
         )
 
         # Question 3: Set comprehensions
-        color_print(f"\n{BOLD}Question 3: Set Comprehensions{RESET}")
-        color_print("Look at these set comprehension examples:", YELLOW)
+        print_subsection_header("Question 3: Set Comprehensions")
+        print_instruction("Look at these set comprehension examples:")
         print_code_block("""
             numbers = range(10)
             
@@ -339,7 +297,7 @@ class TestPythonDataStructuresInteractive:
             coordinates = {(x, y) for x in range(2) for y in range(2)}
             # {(0, 0), (0, 1), (1, 0), (1, 1)}
                          """)
-        answer = get_user_input(f"{YELLOW}What characters surrounds a set comprehension? {RESET}")
+        answer = get_user_input("What characters surrounds a set comprehension?")
         check_answer(
             answer,
             ['{}', 'curly braces', 'braces'],
@@ -348,13 +306,13 @@ class TestPythonDataStructuresInteractive:
 
     @it("teaches about dictionaries")
     def test_dictionaries(self):
-        color_print(f"\n{BOLD}=== Part 4: Dictionaries ==={RESET}")
-        color_print("Let's learn about Python dictionaries and their operations.")
+        print_section_header("=== Part 4: Dictionaries ===")
+        print_info("Let's learn about Python dictionaries and their operations.")
         time.sleep(1)
 
         # Question 1: Dictionary basics
-        color_print(f"\n{BOLD}Question 1: Dictionary Basics{RESET}")
-        color_print("Look at these dictionary operations:", YELLOW)
+        print_subsection_header("Question 1: Dictionary Basics")
+        print_instruction("Look at these dictionary operations:")
         print_code_block("""
             # Creating dictionaries
             empty = {}                           # Empty dictionary
@@ -377,7 +335,7 @@ class TestPythonDataStructuresInteractive:
             age = person.pop('age')              # Remove and return value
             last_item = person.popitem()         # Remove and return last item
                          """)
-        answer = get_user_input(f"{YELLOW}What method safely gets a value from a dictionary with a default if the key isn't found? {RESET}")
+        answer = get_user_input("What method safely gets a value from a dictionary with a default if the key isn't found?")
         check_answer(
             answer,
             ['get', 'get()', '.get', '.get()'],
@@ -385,8 +343,8 @@ class TestPythonDataStructuresInteractive:
         )
 
         # Question 2: Dictionary methods
-        color_print(f"\n{BOLD}Question 2: Dictionary Methods{RESET}")
-        color_print("Look at these dictionary methods:", YELLOW)
+        print_subsection_header("Question 2: Dictionary Methods")
+        print_instruction("Look at these dictionary methods:")
         print_code_block("""
             person = {'name': 'Alice', 'age': 30, 'city': 'New York'}
             
@@ -404,7 +362,7 @@ class TestPythonDataStructuresInteractive:
             ages = [30, 25, 35]
             people = dict(zip(names, ages))  # {'Alice': 30, 'Bob': 25, ...}
                          """)
-        answer = get_user_input(f"{YELLOW}What method returns a view of dictionary key-value pairs as tuples? {RESET}")
+        answer = get_user_input("What method returns a view of dictionary key-value pairs as tuples?")
         check_answer(
             answer,
             ['items', 'items()', '.items', '.items()'],
@@ -412,8 +370,8 @@ class TestPythonDataStructuresInteractive:
         )
 
         # Question 3: Dictionary comprehensions
-        color_print(f"\n{BOLD}Question 3: Dictionary Comprehensions{RESET}")
-        color_print("Look at these dictionary comprehension examples:", YELLOW)
+        print_subsection_header("Question 3: Dictionary Comprehensions")
+        print_instruction("Look at these dictionary comprehension examples:")
         print_code_block("""
             numbers = range(5)
             
@@ -437,15 +395,15 @@ class TestPythonDataStructuresInteractive:
             #  1: {0: 0, 1: 1, 2: 2},
             #  2: {0: 0, 1: 2, 2: 4}}
                          """)
-        answer = get_user_input(f"{YELLOW}What separates keys from values in a dictionary comprehension? {RESET}")
+        answer = get_user_input("What separates keys from values in a dictionary comprehension?")
         check_answer(
             answer,
             [':', 'colon'],
             "The colon : separates keys from values in dictionary comprehensions, just like in regular dictionary literals."
         )
 
-        color_print(f"\n{BOLD}🎉 Congratulations! You've completed the Python data structures lesson!{RESET}", GREEN)
-        color_print("\nKey takeaways:", YELLOW)
+        print_success("🎉 Congratulations! You've completed the Python data structures lesson!")
+        print_info("Key takeaways:")
         print_code_block("""
             # 1. Lists
             numbers = [1, 2, 3]         # Mutable, ordered sequence

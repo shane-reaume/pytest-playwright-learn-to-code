@@ -1,8 +1,7 @@
 # Python Learning and Testing with Pytest-Playwright
 
-🚧 **Work in Progress** 🚧
-
-This is an evolving project that explores innovative ways to learn Python interactively, specifically targeting Python QA engineers and developers who want to learn pytest. The project combines fun interactive learning with real-world testing scenarios.
+| ![Interactive Python Learning Example](02_data_types_example.png) | **🚧 Work in Progress 🚧**<br><br>This is an evolving project that explores innovative ways to learn Python interactively, specifically targeting Python QA engineers and developers who want to learn pytest. The project combines fun interactive learning with real-world testing scenarios. |
+|:---:|:---|
 
 ## Template repo for creating your own pytest-playwright project
 
